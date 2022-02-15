@@ -1,0 +1,19 @@
+name: 'build'
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    name: 'Build'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Build:checkout"
+        uses: actions/checkout@v2
+      - name: 'Build:dockerimage'
+        uses: docker/build-push-action@v1
+        with:
+          registry: ghcr.io
+          username: "andrewperkins"
+          password: ${{ secrets.PAT }}
+          repository: andrewperkins/simple-express-docker
+          tags: latest
